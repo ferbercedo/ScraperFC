@@ -34,6 +34,7 @@ comps = {
     'World Cup': 16, 'Euros': 1, 'Gold Cup': 140,
     # Women's international comps
     "Women's World Cup": 290
+    # AÑADIR AQUÍ TODAS LAS LIGAS QUE INTERESEN
 }
 
 
@@ -64,7 +65,11 @@ class Sofascore:
             'accurateCrossesPercentage', 'accurateLongBalls', 'accurateLongBallsPercentage',
             'interceptions', 'clearances', 'dribbledPast', 'bigChancesMissed', 'totalShots',
             'shotsOnTarget', 'blockedShots', 'goalConversionPercentage', 'hitWoodwork', 'offsides',
-            'expectedGoals', 'errorLeadToGoal', 'errorLeadToShot', 'passToAssist'
+            'expectedGoals', 'errorLeadToGoal', 'errorLeadToShot', 'passToAssist','rating','shotOffTarget',
+            'totalCross', 'totalLongBalls', 'totalPass', 'touches', 'duelWon', 'duelLost', 'expectedAssists'
+
+
+
         ]
         self.concatenated_fields = '%2C'.join(self.league_stats_fields)
 
@@ -408,7 +413,13 @@ class Sofascore:
         match_id = match if isinstance(match, int) else self.get_match_id_from_url(match)
         response = _botasaurus_get(f'{API_PREFIX}/event/{match_id}/lineups')
         if response.status_code == 200:
-            players = response.json()['home']['players'] + response.json()['away']['players']
+            playersHome = response.json()['home']['players']
+            for item in playersHome:
+                item['team'] = 'home'
+            playersAway = response.json()['away']['players']
+            for itemAway in playersAway:
+                itemAway['team'] = 'away'
+            players = playersHome + playersAway
             temp = pd.DataFrame(players)
             columns = list()
             for c in temp.columns:
