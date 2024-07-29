@@ -118,7 +118,7 @@ class Sofascore:
             # Devolver los datos en formato JSON
             data = response.json()['events']
             filtered_data = [
-                item for item in data 
+                item['id'] for item in data 
                 if item['tournament']['uniqueTournament']['id'] in comps.values()
             ]
         
