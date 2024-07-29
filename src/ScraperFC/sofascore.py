@@ -4,6 +4,7 @@ from botasaurus.request import request, Request
 from botasaurus_requests import response
 import numpy as np
 from typing import Union, Sequence
+from datetime import datetime
 
 """ These are the status codes for Sofascore events. Found in event['status'] key.
 {100: {'code': 100, 'description': 'Ended', 'type': 'finished'},
@@ -95,6 +96,36 @@ class Sofascore:
         response = _botasaurus_get(f'{API_PREFIX}/unique-tournament/{comps[league]}/seasons/')
         seasons = dict([(x['year'], x['id']) for x in response.json()['seasons']])
         return seasons
+
+    # ==============================================================================================
+    def get_schedule_football(self) -> dict:
+        """ Returns the scheduled matchs and IDs for today
+        
+        Returns
+        -------
+        seasons : dict
+            Available matchs for today.
+        """
+
+        # Obtener la fecha de hoy en el formato requerido
+        today = datetime.today().strftime('%Y-%m-%d')
+        
+        # Hacer la solicitud GET a la API
+        response = _botasaurus_get(f'{API_PREFIX}/sport/football/scheduled-events/{today}')
+
+        # Verificar si la solicitud fue exitosa
+        if response.status_code == 200:
+            # Devolver los datos en formato JSON
+            data = response.json()['events']
+            filtered_data = [
+                item for item in data 
+                if item['tournament']['uniqueTournament']['id'] in comps.values()
+            ]
+        
+            return filtered_data
+        else:
+            data = dict()
+        return data
 
     # ==============================================================================================
     def get_match_dicts(self, year: str, league:str) -> Sequence[dict]:
