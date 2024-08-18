@@ -83,25 +83,52 @@ comps = {
     'NB I': 187, 'Magyar Kupa': 305,
     # Inglaterra
     'Premier League': 17, 'Championship': 18, 'League One': 24, 'League Two': 25,
-    'National League': 173, 'FA Cup': 19, 'EFL Cup': 21
-    
-    
-    
-    
-    
-    
-    
-
+    'National League': 173, 'FA Cup': 19, 'EFL Cup': 21,
+    # Irlanda
+    'Premier Division': 192, 'Ireland 1st Division': 193, 'FAI Cup': 195,
+    # Italia
+    'Serie A': 23, 'Serie B': 53, 'Serie C, Girone A': 11445, 'Serie C, Girone B': 11447, 
+    'Serie C, Girone C': 11446, 'Coppa Italia': 328, 
+    # Japon
+    'J1 League': 196, 'J2 League': 402, 'Emperor Cup': 323, 
+    # Marruecos
+    'Botola Pro': 937, 
+    # Mexico
+    'Liga MX, Apertura': 11621, 'Liga MX, Clausura': 11620, 
+    # Noruega
+    'Eliteserien': 20, 'Norwegian 1st Division': 22, 
+    # Gales
+    'Cymru Premier': 254, 'FAW Welsh Cup': 388,
+    # Holanda
+    'Eredivisie': 37, 'Eerste Divisie': 131, 'Eredivisie Cup': 22480,
+    # Peru
+    'Peruvian Primera División': 406, 
+    # Polonia
+    'Ekstraklasa': 202, 'Betclic 1. Liga': 229, 'Puchar Polski': 281,
+    # Portugal
+    'Liga Portugal Betclic': 238, 'Liga Portugal 2': 239, 'Taça de Portugal': 336,
+    # Rumania
+    'Romanian Super Liga': 152, 'Liga II':562, 'Cupa Ligii': 1778,
+    # Rusia
+    'Russian Premier League': 203, 'Russian Cup': 91, 
+    # Serbia
+    'Mozzart Bet Superliga': 210, 'Mozzart Bet Prva Liga': 721,
+    # Suecia
+    'Allsvenskan': 40, 'Superettan': 46,
+    # Suiza
+    'Swiss Super League': 215, 'Challenge League': 216,
+    # Turquia
+    'Trendyol Süper Lig': 52, 'Trendyol 1.Lig': 98, 'TFF Süper Kupa': 505, 
+    # Ucrania
+    'Ukrainian Premier League': 218, 
+    # Ururguay
+    'Uruguayan Primera División': 278, 'Copa Uruguay': 18887
     # South America
-    
     "Copa Libertadores": 384,
-    # USA
-    'MLS': 242
     # Men's international comps
     'World Cup': 16, 'Euros': 1, 'Gold Cup': 140,
     # Women's international comps
     "Women's World Cup": 290
-    # AÑADIR AQUÍ TODAS LAS LIGAS QUE INTERESEN
 }
 
 
