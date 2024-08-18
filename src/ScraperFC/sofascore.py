@@ -4,7 +4,7 @@ from botasaurus.request import request, Request
 from botasaurus_requests import response
 import numpy as np
 from typing import Union, Sequence
-from datetime import datetime
+from datetime import datetime, timedelta
 
 """ These are the status codes for Sofascore events. Found in event['status'] key.
 {100: {'code': 100, 'description': 'Ended', 'type': 'finished'},
@@ -24,13 +24,79 @@ API_PREFIX = 'https://api.sofascore.com/api/v1'
 comps = {
     # European continental club comps
     'Champions League': 7, 'Europa League': 679, 'Europa Conference League': 17015,
-    # European domestic leagues
-    'EPL': 17, 'La Liga': 8, 'Bundesliga': 35, 'Serie A': 23, 'Ligue 1': 34,
-    # South America
+    # Alemania
+    'Bundesliga': 35, '2.Bundesliga': 44, 'DFB Pokal': 217, 'DFL SuperCup': 799,
+    # Argentina
     'Argentina Liga Profesional': 155, 'Argentina Copa de la Liga Profesional': 13475,
-    'Liga 1 Peru': 406, "Copa Libertadores": 384,
+    'Copa Argentina': 1024, 'Primera Nacional': 703,
+    # Australia
+    'A-League': 136,
+    # Austria
+    'Bundesliga Austriaca': 45, '2. Liga': 135, 'OFB Cup': 445,
+    # Belgica
+    'Pro League': 38, 'Challenger Pro League': 9, 'Belgian Cup': 326,
+    # Bosnia
+    'Wwin Liga BiH': 222,
+    # Brasil
+    'Brasileirao Serie A': 325, 'Brasileirao Serie B': 390, 'Copa do Brasil': 373,
+    # Bulgaria
+    'Parva Liga': 247, 'Bulgarian Cup': 365,
+    # Canada
+    'Canadian Premier League': 13470, 'Canadian Championship': 9230,
+    # Chequia
+    'Czech First League': 172, 'FNL': 205, 'Czech Cup': 282,
+    # Chile
+    'Chilean Primera División': 11653,
+    # China
+    'CFA Super League': 649,
+    # Chipre
+    'Cypriot First Division': 171, 'Cyprus Cup': 315,
+    # Croacia
+    'HNL': 170, 'Croatian Cup': 307, '1. NL': 724,
+    # Dinamarca
+    'Danish Superliga': 39, 'Danish 1st Division': 47, 'Oddset Pokalen': 76,
+    # Ecuador
+    'LigaPro Serie A': 240, 
+    # Egipto
+    'Egyptian Premier League': 808,
+    # Escocia
+    'Scottish Premiership': 36, 'Scottish Championship': 206, 'Scottish League One': 207,
+    'Scottish Cup': 347,
+    # Eslovaquia
+    'Niké Liga': 211, 
+    # Eslovenia
+    'PrvaLiga': 212,
+    # España
+    'La Liga': 8, 'LaLiga 2': 54, 'Primera Federacion': 17073, 'Segunda Federacion': 544,
+    'Copa del Rey': 329, 'Supercopa de España': 213, 'Liga Femenina': 1127,'Copa de SM La Reina': 11126,
+    # EEUU
+    'MLS': 242,
+    # Estonia
+    'Premium Liiga': 178,
+    # Finlandia
+    'Veikkausliiga': 41, 'Ykkösliiga': 55, 'Suomen Cup': 220,
+    # Francia
+    'Ligue 1': 34, 'Ligue 2': 182, 'National 1': 183, 'Coupe de France': 335, 
+    # Grecia
+    'Stoiximan Super League': 185, 'Greek Cup Betsson': 375,
+    # Hungria
+    'NB I': 187, 'Magyar Kupa': 305,
+    # Inglaterra
+    'Premier League': 17, 'Championship': 18, 'League One': 24, 'League Two': 25,
+    'National League': 173, 'FA Cup': 19, 'EFL Cup': 21
+    
+    
+    
+    
+    
+    
+    
+
+    # South America
+    
+    "Copa Libertadores": 384,
     # USA
-    'MLS': 242, 'USL Championship': 13363, 'USL1': 13362, 'USL2': 13546,
+    'MLS': 242
     # Men's international comps
     'World Cup': 16, 'Euros': 1, 'Gold Cup': 140,
     # Women's international comps
@@ -98,20 +164,20 @@ class Sofascore:
         return seasons
 
     # ==============================================================================================
-    def get_schedule_football(self) -> dict:
-        """ Returns the scheduled matchs and IDs for today
+    def get_yesterday_schedule_football(self) -> dict:
+        """ Returns the scheduled matchs and IDs for yesterday
         
         Returns
         -------
         seasons : dict
-            Available matchs for today.
+            Available matchs for yesterday.
         """
 
         # Obtener la fecha de hoy en el formato requerido
-        today = datetime.today().strftime('%Y-%m-%d')
+        yesterday = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
         
         # Hacer la solicitud GET a la API
-        response = _botasaurus_get(f'{API_PREFIX}/sport/football/scheduled-events/{today}')
+        response = _botasaurus_get(f'{API_PREFIX}/sport/football/scheduled-events/{yesterday}')
 
         # Verificar si la solicitud fue exitosa
         if response.status_code == 200:
