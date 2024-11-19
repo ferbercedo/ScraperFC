@@ -122,7 +122,7 @@ comps = {
     # Ucrania
     'Ukrainian Premier League': 218, 
     # Ururguay
-    'Uruguayan Primera División': 278, 'Copa Uruguay': 18887
+    'Uruguayan Primera División': 278, 'Copa Uruguay': 18887,
     # South America
     "Copa Libertadores": 384,
     # Men's international comps
